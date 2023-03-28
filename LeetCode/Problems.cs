@@ -29,5 +29,29 @@
             }
             return -1;
         }
+
+        public static bool IsIsomorphic(string s, string t)
+        {
+            var characterMap = new Dictionary<char, char>();
+            for (var i = 0; i < s.Length; i++)
+            {
+                if (characterMap.ContainsKey(s[i]))
+                {
+                    if (characterMap[s[i]] != t[i])
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (characterMap.ContainsValue(t[i]))
+                    {
+                        return false;
+                    }
+                    characterMap[s[i]] = t[i];
+                }
+            }
+            return true;
+        }
     }
 }
