@@ -1,4 +1,6 @@
-﻿namespace LeetCode
+﻿using LeetCode.Models;
+
+namespace LeetCode
 {
     public static class Problems
     {
@@ -65,6 +67,40 @@
                 if (subStringIndex == s.Length) return true;
             }
             return false;
+        }
+
+        public static ListNode MergeTwoLists(ListNode list1, ListNode list2)
+        {
+            var current1 = list1;
+            var current2 = list2;
+            ListNode startNode = null;
+            ListNode currentNode = null;
+            while (current1 != null || current2 != null)
+            {
+                var nextValue = 0;
+                if (current1 == null || current2?.val <= current1?.val)
+                {
+                    nextValue = current2?.val ?? 0;
+                    current2 = current2?.next;
+                }
+                else if (current2 == null || current1?.val <= current2?.val)
+                {
+                    nextValue = current1?.val ?? 0;
+                    current1 = current1?.next;
+                }
+                var nextNode = new ListNode(nextValue);
+                if (startNode == null)
+                {
+                    startNode = nextNode;
+                    currentNode = startNode;
+                }
+                else
+                {
+                    currentNode.next = nextNode;
+                    currentNode = currentNode.next;
+                }
+            }
+            return startNode;
         }
     }
 }
