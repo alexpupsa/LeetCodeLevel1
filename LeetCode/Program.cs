@@ -6,5 +6,8 @@
 //var r2 = Problems.PivotIndex(new[] { 2, 1, -1 });
 //Console.WriteLine(r2);
 
-var r3 = Problems.IsIsomorphic("paper", "title");
-Console.WriteLine(r3);
+//var r3 = Problems.IsIsomorphic("paper", "title");
+//Console.WriteLine(r3);
+
+var r4 = Problems.IsSubsequence("abc", "ahbgdc");
+Console.WriteLine(r4);

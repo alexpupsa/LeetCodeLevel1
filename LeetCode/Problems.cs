@@ -53,5 +53,18 @@
             }
             return true;
         }
+
+        public static bool IsSubsequence(string s, string t)
+        {
+            if (string.IsNullOrEmpty(s)) return true;
+
+            var subStringIndex = 0;
+            for (var i = 0; i < t.Length; i++)
+            {
+                if (s[subStringIndex] == t[i]) subStringIndex++;
+                if (subStringIndex == s.Length) return true;
+            }
+            return false;
+        }
     }
 }
