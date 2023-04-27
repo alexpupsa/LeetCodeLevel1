@@ -13,6 +13,7 @@ namespace LeetCode
                 sum += nums[i];
                 output[i] = sum;
             }
+
             return output;
         }
 
@@ -27,8 +28,10 @@ namespace LeetCode
                 {
                     return i;
                 }
+
                 left += nums[i];
             }
+
             return -1;
         }
 
@@ -50,9 +53,11 @@ namespace LeetCode
                     {
                         return false;
                     }
+
                     characterMap[s[i]] = t[i];
                 }
             }
+
             return true;
         }
 
@@ -66,6 +71,7 @@ namespace LeetCode
                 if (s[subStringIndex] == t[i]) subStringIndex++;
                 if (subStringIndex == s.Length) return true;
             }
+
             return false;
         }
 
@@ -88,6 +94,7 @@ namespace LeetCode
                     nextValue = current1?.val ?? 0;
                     current1 = current1?.next;
                 }
+
                 var nextNode = new ListNode(nextValue);
                 if (startNode == null)
                 {
@@ -100,7 +107,38 @@ namespace LeetCode
                     currentNode = currentNode.next;
                 }
             }
+
             return startNode;
+        }
+
+        public static IList<string> GenerateParenthesis(int n)
+        {
+            var list = new List<string>();
+            var queue = new Queue<ParenthesisItem>();
+            queue.Enqueue(new ParenthesisItem("(", 1, 0));
+            while (queue.Any())
+            {
+                var item = queue.Dequeue();
+                if (item.Value?.Length == n * 2)
+                {
+                    list.Add(item.Value);
+                    continue;
+                }
+
+                if (item.OpenCount > item.CloseCount && item.CloseCount < n)
+                {
+                    queue.Enqueue(new ParenthesisItem(string.Concat(item.Value, ")"), item.OpenCount,
+                        item.CloseCount + 1));
+                }
+
+                if (item.OpenCount < n)
+                {
+                    queue.Enqueue(new ParenthesisItem(string.Concat(item.Value, "("), item.OpenCount + 1,
+                        item.CloseCount));
+                }
+            }
+
+            return list.Distinct().ToList();
         }
     }
 }

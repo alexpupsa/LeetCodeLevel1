@@ -77,13 +77,25 @@ namespace LeetCodeTests
             result.Should().BeEquivalentTo(llExpected);
         }
 
+        [Theory]
+        [InlineData(1, new string[] { "()" })]
+        [InlineData(3, new string[] { "((()))", "(()())", "(())()", "()(())", "()()()" })]
+        public void GenerateParenthesis_Should_Return_Correct_Result(int input, string[] expected)
+        {
+            // Act
+            var result = Problems.GenerateParenthesis(input);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
-            ListNode startNode = null;
-            ListNode currentNode = null;
-            for (var i = 0; i < input.Length; i++)
+            ListNode? startNode = null;
+            ListNode? currentNode = null;
+            foreach (var t in input)
             {
-                var node = new ListNode(input[i]);
+                var node = new ListNode(t);
                 if (startNode == null)
                 {
                     startNode = node;
@@ -91,12 +103,13 @@ namespace LeetCodeTests
                 }
                 else
                 {
+                    if (currentNode == null) continue;
                     currentNode.next = node;
-                    currentNode = currentNode.next; 
+                    currentNode = currentNode.next;
                 }
             }
 
-            return startNode;
+            return startNode.As<ListNode>();
         }
     }
 }
