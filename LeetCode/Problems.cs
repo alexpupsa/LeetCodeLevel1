@@ -1,4 +1,5 @@
-﻿using LeetCode.Models;
+﻿using FluentAssertions;
+using LeetCode.Models;
 
 namespace LeetCode
 {
@@ -66,9 +67,9 @@ namespace LeetCode
             if (string.IsNullOrEmpty(s)) return true;
 
             var subStringIndex = 0;
-            for (var i = 0; i < t.Length; i++)
+            foreach (var t1 in t)
             {
-                if (s[subStringIndex] == t[i]) subStringIndex++;
+                if (s[subStringIndex] == t1) subStringIndex++;
                 if (subStringIndex == s.Length) return true;
             }
 
@@ -79,8 +80,8 @@ namespace LeetCode
         {
             var current1 = list1;
             var current2 = list2;
-            ListNode startNode = null;
-            ListNode currentNode = null;
+            ListNode? startNode = null;
+            ListNode? currentNode = null;
             while (current1 != null || current2 != null)
             {
                 var nextValue = 0;
@@ -103,12 +104,13 @@ namespace LeetCode
                 }
                 else
                 {
+                    if(currentNode == null) continue;
                     currentNode.next = nextNode;
                     currentNode = currentNode.next;
                 }
             }
 
-            return startNode;
+            return startNode.As<ListNode>();
         }
 
         public static IList<string> GenerateParenthesis(int n)
