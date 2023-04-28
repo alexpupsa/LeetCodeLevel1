@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections;
+using FluentAssertions;
 using LeetCode.Models;
 
 namespace LeetCode
@@ -104,7 +105,7 @@ namespace LeetCode
                 }
                 else
                 {
-                    if(currentNode == null) continue;
+                    if (currentNode == null) continue;
                     currentNode.next = nextNode;
                     currentNode = currentNode.next;
                 }
@@ -141,6 +142,47 @@ namespace LeetCode
             }
 
             return list.Distinct().ToList();
+        }
+
+        public static ListNode? MergeKLists(ListNode?[] lists)
+        {
+            var nodes = lists.ToList();
+            var mainIndex = GetLowestNodeIndex(nodes);
+            if (mainIndex == -1) return null;
+
+            var main = nodes[mainIndex];
+            var full = main;
+            var current = full;
+            while (main != null)
+            {
+                nodes[mainIndex] = null;
+                if (main.next != null)
+                {
+                    nodes.Add(main.next);
+                }
+
+                mainIndex = GetLowestNodeIndex(nodes);
+                if (mainIndex == -1) break;
+                main = nodes[mainIndex];
+                current!.next = main;
+                current = current.next;
+            }
+
+            return full;
+        }
+
+        private static int GetLowestNodeIndex(List<ListNode?> lists)
+        {
+            var minValue = 10000;
+            var foundIndex = -1;
+            for (var i = 0; i < lists.Count; i++)
+            {
+                if (lists[i] == null || lists[i]?.val >= minValue) continue;
+                minValue = lists[i]?.val ?? 0;
+                foundIndex = i;
+            }
+
+            return foundIndex;
         }
     }
 }

@@ -89,6 +89,23 @@ namespace LeetCodeTests
             result.Should().BeEquivalentTo(expected);
         }
 
+        [Theory]
+        [InlineData(
+            new int[] { 1, 1, 2, 3, 4, 4, 5, 6 },
+            new int[] { 1, 4, 5 }, new int[] { 1, 3, 4 }, new int[] { 2, 6 })]
+        [InlineData(new int[] { })]
+        [InlineData(new int[] { }, new int[] { })]
+        [InlineData(new int[] { -1, 2 }, new int[] { 2 }, new int[] { }, new int[] { -1 })]
+        public void MergeKLists_Should_Return_Correct_Result(int[] expected, params int[][] input)
+        {
+            // Act
+            var result = Problems.MergeKLists(input.Select(GenerateLinkedList).ToArray());
+            var llExpected = GenerateLinkedList(expected);
+
+            // Assert
+            result.Should().BeEquivalentTo(llExpected);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;
