@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using FluentAssertions;
+﻿using FluentAssertions;
 using LeetCode.Models;
 
 namespace LeetCode
