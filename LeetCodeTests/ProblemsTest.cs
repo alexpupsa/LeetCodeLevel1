@@ -106,6 +106,23 @@ namespace LeetCodeTests
             result.Should().BeEquivalentTo(llExpected);
         }
 
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4 }, new int[] { 2, 1, 4, 3 })]
+        [InlineData(new int[] { }, new int[] { })]
+        [InlineData(new int[] { 1 }, new int[] { 1 })]
+        public void SwapPairs_Should_Return_Correct_Result(int[] list, int[] expected)
+        {
+            // Arrange
+            var ll = GenerateLinkedList(list);
+            var llExpected = GenerateLinkedList(expected);
+
+            // Act
+            var result = Problems.SwapPairs(ll);
+
+            // Assert
+            result.Should().BeEquivalentTo(llExpected);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;

@@ -170,6 +170,38 @@ namespace LeetCode
             return full;
         }
 
+        public static ListNode? SwapPairs(ListNode? head)
+        {
+            if (head == null) return null;
+
+            var current = head;
+            ListNode? previous = null;
+            var firstIteration = true;
+
+            while (current?.next != null)
+            {
+                var second = current.next;
+                var third = second.next;
+                if (firstIteration)
+                {
+                    head = second;
+                    firstIteration = false;
+                }
+
+                current.next.next = current;
+                current.next = third;
+                if (previous != null)
+                {
+                    previous.next = second;
+                }
+
+                previous = current;
+                current = third;
+            }
+
+            return head;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;
