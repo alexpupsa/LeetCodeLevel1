@@ -123,6 +123,23 @@ namespace LeetCodeTests
             result.Should().BeEquivalentTo(llExpected);
         }
 
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 5 }, 2, new int[] { 2, 1, 4, 3, 5 })]
+        [InlineData(new int[] { 1, 2, 3, 4, 5 }, 3, new int[] { 3, 2, 1, 4, 5 })]
+        [InlineData(new int[] { 1 }, 2, new int[] { 1 })]
+        public void ReverseKGroup_Should_Return_Correct_Result(int[] list, int k, int[] expected)
+        {
+            // Arrange
+            var ll = GenerateLinkedList(list);
+            var llExpected = GenerateLinkedList(expected);
+
+            // Act
+            var result = Problems.ReverseKGroup(ll, k);
+
+            // Assert
+            result.Should().BeEquivalentTo(llExpected);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;

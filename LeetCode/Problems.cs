@@ -202,6 +202,49 @@ namespace LeetCode
             return head;
         }
 
+        public static ListNode? ReverseKGroup(ListNode? head, int k)
+        {
+            if (head == null) return null;
+
+            var previous = new ListNode
+            {
+                next = head
+            };
+            var current = previous.next;
+            head = previous;
+
+            while (current != null)
+            {
+                var count = 0;
+                var last = current;
+                var nodeList = new List<ListNode?>();
+                while (count < k && last != null)
+                {
+                    nodeList.Add(last);
+                    count++;
+                    last = last?.next;
+                }
+
+                if (count < k) break;
+
+                current = nodeList.LastOrDefault()?.next;
+                nodeList.Reverse();
+                var root = nodeList.First();
+                var currentInGroup = root;
+                foreach (var listNode in nodeList.Skip(1))
+                {
+                    currentInGroup!.next = listNode;
+                    currentInGroup = currentInGroup.next;
+                }
+
+                currentInGroup!.next = current;
+                previous!.next = root;
+                previous = currentInGroup;
+            }
+
+            return head?.next;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;
