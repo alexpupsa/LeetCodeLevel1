@@ -245,6 +245,36 @@ namespace LeetCode
             return head?.next;
         }
 
+        public static int RemoveDuplicates(int[] nums)
+        {
+            var overwriteIndex = 0;
+            var startOverwrite = false;
+            var countDuplicate = 0;
+            for (var i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] == nums[i - 1])
+                {
+                    if (!startOverwrite)
+                    {
+                        overwriteIndex = i;
+                    }
+
+                    startOverwrite = true;
+                    countDuplicate++;
+                }
+                else
+                {
+                    if (startOverwrite)
+                    {
+                        nums[overwriteIndex] = nums[i];
+                        overwriteIndex++;
+                    }
+                }
+            }
+
+            return nums.Length - countDuplicate;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;

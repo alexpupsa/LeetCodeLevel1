@@ -140,6 +140,21 @@ namespace LeetCodeTests
             result.Should().BeEquivalentTo(llExpected);
         }
 
+        [Theory]
+        [InlineData(new int[] { 1, 1, 2 }, new int[] { 1, 2 }, 2)]
+        [InlineData(new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }, new int[] { 0, 1, 2, 3, 4 }, 5)]
+        public void RemoveDuplicates_Should_Return_Correct_Result(int[] list, int[] expectedList, int expectedCount)
+        {
+            // Arrange
+
+            // Act
+            var result = Problems.RemoveDuplicates(list);
+
+            // Assert
+            string.Join(',', list).Should().StartWith(string.Join(',', expectedList));
+            result.Should().Be(expectedCount);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;
