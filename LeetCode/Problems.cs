@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using LeetCode.Models;
+﻿using LeetCode.Models;
 
 namespace LeetCode
 {
@@ -76,7 +75,7 @@ namespace LeetCode
             return false;
         }
 
-        public static ListNode MergeTwoLists(ListNode list1, ListNode list2)
+        public static ListNode? MergeTwoLists(ListNode list1, ListNode list2)
         {
             var current1 = list1;
             var current2 = list2;
@@ -110,7 +109,7 @@ namespace LeetCode
                 }
             }
 
-            return startNode.As<ListNode>();
+            return startNode;
         }
 
         public static IList<string> GenerateParenthesis(int n)
