@@ -187,6 +187,23 @@ namespace LeetCodeTests
             result.Should().Be(expectedIndex);
         }
 
+        [Theory]
+        [InlineData(10, 3, 3)]
+        [InlineData(7, -3, -2)]
+        [InlineData(1, 1, 1)]
+        [InlineData(-2147483648, -1, 2147483647)]
+        [InlineData(-2147483648, 1, -2147483648)]
+        public void Divide_Should_Return_Correct_Result(int divident, int divisor, int expectedResult)
+        {
+            // Arrange
+
+            // Act
+            var result = Problems.Divide(divident, divisor);
+
+            // Assert
+            result.Should().Be(expectedResult);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;

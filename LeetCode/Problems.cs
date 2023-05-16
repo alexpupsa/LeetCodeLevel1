@@ -325,6 +325,35 @@ namespace LeetCode
             return -1;
         }
 
+        public static int Divide(int dividend, int divisor)
+        {
+            var isOnlyOneNegative = dividend < 0 ^ divisor < 0;
+            var count = 0;
+
+            if (dividend > 0) dividend = -dividend;
+            if (divisor > 0) divisor = -divisor;
+
+            if (dividend == int.MinValue && divisor == -1)
+            {
+                return isOnlyOneNegative ? int.MinValue : int.MaxValue;
+            }
+
+            while (dividend <= divisor)
+            {
+                dividend -= divisor;
+                count++;
+            }
+
+            if (count < 0)
+            {
+                return isOnlyOneNegative ? int.MinValue : int.MaxValue;
+            }
+
+            if (isOnlyOneNegative) count = -count;
+
+            return count;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;
