@@ -274,6 +274,36 @@ namespace LeetCode
             return nums.Length - countDuplicate;
         }
 
+        public static int RemoveElement(int[] nums, int val)
+        {
+            var overwriteIndex = 0;
+            var startOverwrite = false;
+            var countVal = 0;
+            for (var i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == val)
+                {
+                    if (!startOverwrite)
+                    {
+                        overwriteIndex = i;
+                    }
+
+                    startOverwrite = true;
+                    countVal++;
+                }
+                else
+                {
+                    if (startOverwrite)
+                    {
+                        nums[overwriteIndex] = nums[i];
+                        overwriteIndex++;
+                    }
+                }
+            }
+
+            return nums.Length - countVal;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;
