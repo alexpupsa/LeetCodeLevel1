@@ -170,6 +170,23 @@ namespace LeetCodeTests
             result.Should().Be(expectedCount);
         }
 
+        [Theory]
+        [InlineData("sadbutsad", "sad", 0)]
+        [InlineData("leetcode", "leeto", -1)]
+        [InlineData("aaa", "aaaa", -1)]
+        [InlineData("mississippi", "issip", 4)]
+        [InlineData("mississippi", "pi", 9)]
+        public void StrStr_Should_Return_Correct_Result(string haystack, string needle, int expectedIndex)
+        {
+            // Arrange
+
+            // Act
+            var result = Problems.StrStr(haystack, needle);
+
+            // Assert
+            result.Should().Be(expectedIndex);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;
