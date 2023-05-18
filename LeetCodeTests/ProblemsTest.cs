@@ -204,6 +204,25 @@ namespace LeetCodeTests
             result.Should().Be(expectedResult);
         }
 
+        [Theory]
+        [InlineData("barfoothefoobarman", new string[] { "foo", "bar" }, new int[] { 0, 9 })]
+        [InlineData("wordgoodgoodgoodbestword", new string[] { "word", "good", "best", "word" }, new int[] { })]
+        [InlineData("barfoofoobarthefoobarman", new string[] { "bar", "foo", "the" }, new int[] { 6, 9, 12 })]
+        [InlineData("wordgoodgoodgoodbestword", new string[] { "word", "good", "best", "good" }, new int[] { 8 })]
+        [InlineData("lingmindraboofooowingdingbarrwingmonkeypoundcake", new string[] { "fooo", "barr", "wing", "ding", "wing" }, new int[] { 13 })]
+        [InlineData("aaaaaaaaaaaaaa", new string[] { "aa", "aa" }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })]
+        [InlineData("dddddddddddd", new string[] { "dddd", "dddd" }, new int[] { 0, 1, 2, 3, 4 })]
+        public void FindSubstring_Should_Return_Correct_Result(string input, string[] words, int[] expectedResult)
+        {
+            // Arrange
+
+            // Act
+            var result = Problems.FindSubstring(input, words);
+
+            // Assert
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;

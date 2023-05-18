@@ -354,6 +354,43 @@ namespace LeetCode
             return count;
         }
 
+        public static IList<int> FindSubstring(string s, string[] words)
+        {
+            var indexes = new List<int>();
+            var numberOfWords = words.Length;
+            var wordLength = words[0].Length;
+            var remainingCombos = words.ToList();
+            var startIndex = 0;
+            for (var i = 0; i <= s.Length - wordLength; i++)
+            {
+                var word = s.Substring(i, wordLength);
+
+                if (!remainingCombos.Remove(word))
+                {
+                    if (remainingCombos.Count < numberOfWords) i = startIndex;
+                    remainingCombos = words.ToList();
+                    continue;
+                }
+                else
+                {
+                    if (remainingCombos.Count == numberOfWords - 1)
+                    {
+                        startIndex = i;
+                    }
+                    i += wordLength - 1;
+                }
+
+                if (!remainingCombos.Any())
+                {
+                    i = startIndex;
+                    indexes.Add(i);
+                    remainingCombos = words.ToList();
+                }
+            }
+
+            return indexes;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;
