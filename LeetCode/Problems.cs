@@ -391,6 +391,37 @@ namespace LeetCode
             return indexes;
         }
 
+        public static void NextPermutation(int[] nums)
+        {
+            var i = nums.Length - 1;
+            while (i > 0 && nums[i] <= nums[i - 1])
+            {
+                i--;
+            }
+
+            var left = 0;
+            var right = nums.Length - 1;
+
+            if (i > 0)
+            {
+                i--;
+                var j = nums.Length - 1;
+                while (nums[j] <= nums[i])
+                {
+                    j--;
+                }
+                (nums[i], nums[j]) = (nums[j], nums[i]);
+                left = i + 1;
+            }
+
+            while (left < right)
+            {
+                (nums[left], nums[right]) = (nums[right], nums[left]);
+                left++;
+                right--;
+            }
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;

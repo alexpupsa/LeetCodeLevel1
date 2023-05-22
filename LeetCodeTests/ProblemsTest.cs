@@ -223,6 +223,23 @@ namespace LeetCodeTests
             result.Should().BeEquivalentTo(expectedResult);
         }
 
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3 }, new int[] { 1, 3, 2 })]
+        [InlineData(new int[] { 3, 2, 1 }, new int[] { 1, 2, 3 })]
+        [InlineData(new int[] { 1, 1, 5 }, new int[] { 1, 5, 1 })]
+        [InlineData(new int[] { 1, 3, 2 }, new int[] { 2, 1, 3 })]
+
+        public void NextPermutation_Should_Return_Correct_Result(int[] nums, int[] expectedResult)
+        {
+            // Arrange
+
+            // Act
+            Problems.NextPermutation(nums);
+
+            // Assert
+            nums.Should().BeEquivalentTo(expectedResult, o => o.WithStrictOrdering());
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;
