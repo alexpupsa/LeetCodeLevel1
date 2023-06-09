@@ -245,6 +245,11 @@ namespace LeetCodeTests
         [InlineData(")()())", 4)]
         [InlineData("", 0)]
         [InlineData("()(()", 2)]
+        [InlineData("((())))()()()()", 8)]
+        [InlineData("(()()", 4)]
+        [InlineData("((()))())", 8)]
+        [InlineData("(()(((()", 2)]
+        [InlineData("()(()(((", 2)]
         public void LongestValidParentheses_Should_Return_Correct_Result(string s, int expectedResult)
         {
             // Arrange

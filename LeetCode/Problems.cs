@@ -1,4 +1,5 @@
 ﻿using LeetCode.Models;
+using System.Text;
 
 namespace LeetCode
 {
@@ -425,50 +426,69 @@ namespace LeetCode
         public static int LongestValidParentheses(string s)
         {
             var longest = 0;
-            var open = 0;
-            var current = 0;
-            var left = -1;
-            var right = -1;
+            var valid = true;
 
-            for (var i = 0; i < s.Length; i++)
+            s = s.Replace("()", ">2<");
+
+            while (valid)
             {
-               
-                if (s[i] == '(')
+                var t = new StringBuilder();
+                var sum = 0;
+                var startIndex = 0;
+                var open = false;
+                for (var i = 0; i < s.Length; i++)
                 {
-                    if (left < 0) left = i;
-                    if(open == 0)
-                    open++;
-                    current++;
+                    if (s[i] == '(')
+                    {
+                        open = true;
+                        if (sum > 0)
+                        {
+                            t.Append($">{sum}<");
+                            sum = 0;
+                        }
+                        t.Append('(');
+                    }
+                    else if (s[i] == ')')
+                    {
+                        if (open)
+                        {
+                            sum += 2;
+                            t.Length--;
+                        }
+
+                        if (sum > 0)
+                        {
+                            t.Append($">{sum}<");
+                        }
+
+                        if (!open)
+                        {
+                            t.Append(')');
+                        }
+
+                        if (sum > longest) longest = sum;
+                        sum = 0;
+                        open = false;
+                    }
+                    else if (s[i] == '>')
+                    {
+                        startIndex = i + 1;
+                    }
+                    else if (s[i] == '<')
+                    {
+                        sum += int.Parse(s[startIndex..i]);
+                        if (sum > longest) longest = sum;
+                    }
                 }
-                else
+
+                if (sum > 0)
                 {
-                    if (open < 1)
-                    {
-
-                    }
-                    else
-                    {
-                        open--;
-                        current++;
-                    }
+                    t.Append($">{sum}<");
                 }
 
-                if (open == 0)
-                {
-                    if (right + 1 == left)
-                    {
-                        right = i - 1;
-                    }
-                    else
-                    {
-
-                    }
-                }
+                valid = !s.Equals(t.ToString());
+                s = t.ToString();
             }
-
-            current -= open;
-
-            if (current > longest) longest = current;
 
             return longest;
         }
