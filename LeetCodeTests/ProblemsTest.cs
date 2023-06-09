@@ -240,6 +240,22 @@ namespace LeetCodeTests
             nums.Should().BeEquivalentTo(expectedResult, o => o.WithStrictOrdering());
         }
 
+        [Theory]
+        [InlineData("(()", 2)]
+        [InlineData(")()())", 4)]
+        [InlineData("", 0)]
+        [InlineData("()(()", 2)]
+        public void LongestValidParentheses_Should_Return_Correct_Result(string s, int expectedResult)
+        {
+            // Arrange
+
+            // Act
+            var result = Problems.LongestValidParentheses(s);
+
+            // Assert
+            result.Should().Be(expectedResult);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;

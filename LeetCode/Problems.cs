@@ -422,6 +422,57 @@ namespace LeetCode
             }
         }
 
+        public static int LongestValidParentheses(string s)
+        {
+            var longest = 0;
+            var open = 0;
+            var current = 0;
+            var left = -1;
+            var right = -1;
+
+            for (var i = 0; i < s.Length; i++)
+            {
+               
+                if (s[i] == '(')
+                {
+                    if (left < 0) left = i;
+                    if(open == 0)
+                    open++;
+                    current++;
+                }
+                else
+                {
+                    if (open < 1)
+                    {
+
+                    }
+                    else
+                    {
+                        open--;
+                        current++;
+                    }
+                }
+
+                if (open == 0)
+                {
+                    if (right + 1 == left)
+                    {
+                        right = i - 1;
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+
+            current -= open;
+
+            if (current > longest) longest = current;
+
+            return longest;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;
