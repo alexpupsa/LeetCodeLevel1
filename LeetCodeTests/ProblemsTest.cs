@@ -261,6 +261,21 @@ namespace LeetCodeTests
             result.Should().Be(expectedResult);
         }
 
+        [Theory]
+        [InlineData(new int[] { 2, 7, 11, 15 }, 9, new int[] { 0, 1 })]
+        [InlineData(new int[] { 3, 2, 4 }, 6, new int[] { 1, 2 })]
+        [InlineData(new int[] { 3, 3 }, 6, new int[] { 0, 1 })]
+        public void TwoSum_Should_Return_Correct_Result(int[] nums, int target, int[] expectedResult)
+        {
+            // Arrange
+
+            // Act
+            var result = Problems.TwoSum(nums, target);
+
+            // Assert
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;

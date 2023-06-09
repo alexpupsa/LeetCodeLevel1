@@ -493,6 +493,26 @@ namespace LeetCode
             return longest;
         }
 
+        public static int[] TwoSum(int[] nums, int target)
+        {
+            var solution = new int[2];
+
+            for (var i = 0; i < nums.Length - 1; i++)
+            {
+                for (var j = i + 1; j < nums.Length; j++)
+                {
+                    if (nums[i] + nums[j] == target)
+                    {
+                        solution[0] = i;
+                        solution[1] = j;
+                        return solution;
+                    }
+                }
+            }
+
+            return solution;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;
