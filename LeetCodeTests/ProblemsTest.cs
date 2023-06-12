@@ -276,6 +276,23 @@ namespace LeetCodeTests
             result.Should().BeEquivalentTo(expectedResult);
         }
 
+        [Theory]
+        [InlineData("abcabcbb", 3)]
+        [InlineData("bbbbb", 1)]
+        [InlineData("pwwkew", 3)]
+        [InlineData(" ", 1)]
+        [InlineData("", 0)]
+        public void LengthOfLongestSubstring_Should_Return_Correct_Result(string s, int expectedResult)
+        {
+            // Arrange
+
+            // Act
+            var result = Problems.LengthOfLongestSubstring(s);
+
+            // Assert
+            result.Should().Be(expectedResult);
+        }
+
         private static ListNode GenerateLinkedList(int[] input)
         {
             ListNode? startNode = null;

@@ -513,6 +513,32 @@ namespace LeetCode
             return solution;
         }
 
+        public static int LengthOfLongestSubstring(string s)
+        {
+            var longest = 0;
+            var max = 0;
+            var subs = new List<string>();
+            for (var i = 0; i < s.Length; i++)
+            {
+                if (subs.Any())
+                {
+                    max = subs.Select(x => x.Length).Max();
+                    if (max > longest) longest = max;
+                }
+
+                subs = subs.Where(x => !x.Contains(s[i])).Select(x => x + s[i]).ToList();
+                subs.Add(new string(s[i], 1));
+            }
+
+            if (subs.Any())
+            {
+                max = subs.Select(x => x.Length).Max();
+                if (max > longest) longest = max;
+            }
+
+            return longest;
+        }
+
         private static int GetLowestNodeIndex(List<ListNode?> lists)
         {
             var minValue = 10000;
